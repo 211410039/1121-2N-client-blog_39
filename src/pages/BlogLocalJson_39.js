@@ -1,36 +1,18 @@
-import { useState, useEffect } from 'react'; //useState用來存資料;useEffect用來抓資料(他們是一組的)
+import { useState } from 'react';
+import blogData_39 from '../data/bogData';
 
-//let api_url=`http://localhost:5000/api/card_39`;
-
-import { supabase } from '../db/clientSupabase';
-
-const BlogSupabase_39 = () => {
+const BlogLocalJson_39 = () => {
   const [name, setName] = useState('WangLin Chung');
   const [id, setId] = useState(211410039);
-  const [blogs, setBlogs] = useState([]);
-
-  const fetchBlogFromSupabase = async () => {
-    try {
-      // const response = await fetch(api_url);
-      // const data = await response.json();
-
-      let { data, error } = await supabase.from('card_39').select('*');
-
-      console.log('blogs data', data);
-      setBlogs(data);
-    } catch (error) {
-      console.log(error);
-    }
-  };
-  useEffect(() => {
-    fetchBlogFromSupabase();
-  }, []);
+  const [blogs, setBlogs] = useState(blogData_39);
 
   return (
     <section className='blogs'>
       <div className='section-title'>
-        <h2>Blogs From Supabase</h2>
-        <h3> {(name, id)} </h3>
+        <h2>Blogs From Local Json</h2>
+        <h3>
+          {name},{id}
+        </h3>
       </div>
       <div className='blogs-center'>
         {blogs.map((item) => {
@@ -54,4 +36,4 @@ const BlogSupabase_39 = () => {
   );
 };
 
-export default BlogSupabase_39;
+export default BlogLocalJson_39;
